@@ -39,6 +39,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter</artifactId>
@@ -50,12 +51,17 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+<!--    如果dependencies里的dependency自己没有声明version元素，-->
+<!--    那么maven就会到dependencyManagement里面去找有没有对该artifactId和groupId进行过版本声明，-->
+<!--    如果有，就继承它，如果没有就会报错，告诉你必须为dependency声明一个version,类似于全局-->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -64,6 +70,18 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.70</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>5.8.10</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
