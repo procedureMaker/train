@@ -1,5 +1,7 @@
 package com.example.train.member.controller;
 
+import com.example.train.common.resp.CommonResp;
+import com.example.train.member.req.MemberRegisterReq;
 import com.example.train.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +17,23 @@ public class MemberController {
     private MemberService memberService;
 
     @GetMapping("/count")
-    public Integer count() {
-        return memberService.count();
+    public CommonResp<Integer> count() {
+//        int count = memberService.count();
+//        CommonResp<Integer> commonResp = new CommonResp<>();
+//        commonResp.setContent(count);
+
+        CommonResp<Integer> result = new CommonResp<>();
+        result.setContent(memberService.count());
+        return result;
     }
 
     @PostMapping("/register")
-    public Long register(String mobile) {
-        return memberService.register(mobile);
+    public CommonResp<Long> register(MemberRegisterReq memberRegisterReq) {
+//        Long register = memberService.register(memberRegisterReq);
+//        CommonResp<Long> commonResp = new CommonResp<>();
+//        commonResp.setContent(register);
+//        这是由于加了一个有参的构造函数
+        long register = memberService.register(memberRegisterReq);
+        return new CommonResp<>(register);
     }
 }

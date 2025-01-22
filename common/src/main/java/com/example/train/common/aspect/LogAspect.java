@@ -1,4 +1,4 @@
-package com.example.train.common;
+package com.example.train.common.aspect;
 
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSONObject;

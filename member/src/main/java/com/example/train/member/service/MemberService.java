@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.example.train.member.domain.Member;
 import com.example.train.member.domain.MemberExample;
 import com.example.train.member.mapper.MemberMapper;
+import com.example.train.member.req.MemberRegisterReq;
 import org.aspectj.apache.bcel.generic.RET;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,8 @@ public class MemberService {
         return Math.toIntExact(memberMapper.countByExample(null));
     }
 
-    public long register(String mobile) {
+    public long register(MemberRegisterReq memberRegisterReq) {
+        String mobile  = memberRegisterReq.getMobile();
         MemberExample memberExample = new MemberExample();
         //其实是一个for循环，返回等于mobile的集合
         memberExample.createCriteria().andMobileEqualTo(mobile);
