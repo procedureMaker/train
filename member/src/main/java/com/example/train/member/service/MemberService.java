@@ -39,7 +39,7 @@ public class MemberService {
 
         Member member = new Member();
         member.setId(System.currentTimeMillis());
-        member.setId(1L);
+//        member.setId(1L);
         member.setMobile(mobile);
         memberMapper.insert(member);
         return member.getId();
