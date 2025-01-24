@@ -1,8 +1,10 @@
 package com.example.train.member.service;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.IdUtil;
 import com.example.train.common.exception.BusinessException;
 import com.example.train.common.exception.BusinessExceptionEnum;
+import com.example.train.common.util.SnowUtil;
 import com.example.train.member.domain.Member;
 import com.example.train.member.domain.MemberExample;
 import com.example.train.member.mapper.MemberMapper;
@@ -38,8 +40,12 @@ public class MemberService {
         }
 
         Member member = new Member();
-        member.setId(System.currentTimeMillis());
+//        member.setId(System.currentTimeMillis());
 //        member.setId(1L);
+        //机器中心,数据中心
+//        member.setId(IdUtil.getSnowflake(1,1).nextId());
+//        封装一下
+        member.setId(SnowUtil.getSnowflakeNextId());
         member.setMobile(mobile);
         memberMapper.insert(member);
         return member.getId();
