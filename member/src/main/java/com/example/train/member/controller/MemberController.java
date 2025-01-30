@@ -2,6 +2,7 @@ package com.example.train.member.controller;
 
 import com.example.train.common.resp.CommonResp;
 import com.example.train.member.req.MemberRegisterReq;
+import com.example.train.member.req.MemberSendCodeReq;
 import com.example.train.member.service.MemberService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,11 @@ public class MemberController {
 //        这是由于加了一个有参的构造函数
         long register = memberService.register(memberRegisterReq);
         return new CommonResp<>(register);
+    }
+
+    @PostMapping("/send-code")
+    public CommonResp<Long> sendCode(@Valid MemberSendCodeReq memberSendCodeReq) {
+        memberService.sendCode(memberSendCodeReq);
+        return new CommonResp<>();
     }
 }
