@@ -9,6 +9,21 @@ Accept-Encoding: br,deflate,gzip,x-gzip
   "mobile": "12345678001"
 }
 
+<> 2025-02-02T202056.200.json
+
+###
+
+POST http://localhost:8000/member/member/send-code
+Content-Type: application/json
+Content-Length: 29
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "mobile": "12345678001"
+}
+
 <> 2025-02-02T095926.200.json
 
 ###

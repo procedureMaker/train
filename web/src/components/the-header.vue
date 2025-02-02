@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import {defineComponent, reactive, ref} from "vue";
-
+// import {defineComponent, reactive, ref} from "vue";
+import {defineComponent, ref} from "vue";
 
 export default defineComponent({
   name: "the-header",
@@ -31,7 +31,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-//body{
-//  全局配置
-//}
+
 </style>

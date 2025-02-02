@@ -63,7 +63,7 @@
   </a-layout>
 
 </template>
-<script setup>
+<script>
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
 import TheHeader from "@/components/the-header";
@@ -76,9 +76,6 @@ export default defineComponent({
     NotificationOutlined,
   },
   setup() {
-    const router = useRouter();
-
-
 
     return {
 
