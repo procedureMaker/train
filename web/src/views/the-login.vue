@@ -22,7 +22,7 @@
         >
           <a-input v-model:value="loginForm.code">
             <template #addonAfter>
-              <a @click="1">获取验证码</a>
+              <a @click="sendCode">获取验证码</a>
             </template>
           </a-input>
           <!--<a-input v-model:value="loginForm.code" placeholder="验证码"/>-->
@@ -38,13 +38,14 @@
 </template>
 <script>
 import { defineComponent, reactive } from 'vue';
+import axios from "axios";
+
 export default defineComponent({
   name:"login-view",
   setup() {
     const loginForm = reactive({
-      username: '',
-      password: '',
-      remember: true,
+      mobile:'',
+      code:'',
     });
     const onFinish = values => {
       console.log('Success:', values);
@@ -52,10 +53,18 @@ export default defineComponent({
     const onFinishFailed = errorInfo => {
       console.log('Failed:', errorInfo);
     };
+    const sendCode = () => {
+      axios.post("http://localhost:8000/member/member/send-code",{
+        mobile:loginForm.mobile
+      }).then(response => {
+        console.log(response);
+      })
+    };
     return {
       loginForm,
       onFinish,
       onFinishFailed,
+      sendCode
     };
   },
 });
