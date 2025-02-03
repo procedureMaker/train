@@ -5,6 +5,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.jwt.JWTUtil;
 import com.example.train.common.exception.BusinessException;
 import com.example.train.common.exception.BusinessExceptionEnum;
 import com.example.train.common.util.SnowUtil;
@@ -23,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 @Service
@@ -101,8 +103,14 @@ public class MemberService {
         if (!"8888".equals(code)){
             throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_CODE_ERROR);
         }
+        MemberLoginResp memberLoginResp = BeanUtil.copyProperties(memberDB,MemberLoginResp.class);
 //            返回什么，密码一般会加密存储，但也不应该返回前端
-        return BeanUtil.copyProperties(memberDB,MemberLoginResp.class);
+        Map<String, Object> map = BeanUtil.beanToMap(memberLoginResp);
+        String key = "zpl";
+//        token是一个map和一个字节数组
+        String token = JWTUtil.createToken(map,key.getBytes());
+        memberLoginResp.setToken(token);
+        return memberLoginResp;
     }
 
     /**
