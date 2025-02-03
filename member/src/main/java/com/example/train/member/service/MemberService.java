@@ -8,6 +8,7 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.jwt.JWTUtil;
 import com.example.train.common.exception.BusinessException;
 import com.example.train.common.exception.BusinessExceptionEnum;
+import com.example.train.common.util.JwtUtil;
 import com.example.train.common.util.SnowUtil;
 import com.example.train.member.domain.Member;
 import com.example.train.member.domain.MemberExample;
@@ -104,11 +105,9 @@ public class MemberService {
             throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_CODE_ERROR);
         }
         MemberLoginResp memberLoginResp = BeanUtil.copyProperties(memberDB,MemberLoginResp.class);
-//            返回什么，密码一般会加密存储，但也不应该返回前端
-        Map<String, Object> map = BeanUtil.beanToMap(memberLoginResp);
-        String key = "zpl";
+//        返回什么，密码一般会加密存储，但也不应该返回前端
 //        token是一个map和一个字节数组
-        String token = JWTUtil.createToken(map,key.getBytes());
+        String token = JwtUtil.createToken(memberLoginResp.getId(),memberLoginResp.getMobile());
         memberLoginResp.setToken(token);
         return memberLoginResp;
     }
