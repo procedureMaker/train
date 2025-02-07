@@ -30,7 +30,7 @@ export default defineComponent({
   name: "the-header",
   setup() {
     let member = store.state.member;
-
+    console.log("111",store.state.member.mobile)
     return {
       selectedKeys1: ref(['2']),
       member
