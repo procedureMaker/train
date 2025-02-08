@@ -1,0 +1,23 @@
+###
+POST http://localhost:8001/member/passenger/save
+Content-Type: application/json
+
+{
+  "memberId": "12345678001",
+  "name": "test",
+  "idCard": "123321",
+  "type": "1"
+}
+
+###
+POST http://localhost:8000/member/passenger/save
+Content-Type: application/json
+#token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3MzkwMDYzNjgsIm1vYmlsZSI6IjEyMzQ1Njc4MDAxIiwiaWQiOjE4ODQ5MjEwNDY4MzEzMTY5OTIsImV4cCI6MTczOTA5Mjc2OCwiaWF0IjoxNzM5MDA2MzY4fQ.JK8CBv6L-hkFfIYYcYxi70Rx5oxc1LzIHi3bRs9ZyyE
+token: {{token}}
+
+{
+  "memberId": "12345678001",
+  "name": "test",
+  "idCard": "123321",
+  "type": "1"
+}

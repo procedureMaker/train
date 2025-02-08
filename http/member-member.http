@@ -35,13 +35,9 @@ Content-Type: application/json
   "code": "8888"
 }
 
-###
-POST http://localhost:8001/member/passenger/save
-Content-Type: application/json
-
-{
-  "memberId": "12345678001",
-  "name": "test",
-  "idCard": "123321",
-  "type": "1"
-}
+> {%
+    client.log(JSON.stringify(response.body));
+    client.log(JSON.stringify(response.body.content.token));
+    client.global.set("token", response.body.content.token);
+%}
+###全局变量
