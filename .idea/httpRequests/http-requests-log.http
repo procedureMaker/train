@@ -1,3 +1,21 @@
+POST http://localhost:8001/member/passenger/save
+Content-Type: application/json
+Content-Length: 86
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "memberId": "12345678001",
+  "name": "test",
+  "idCard": "123321",
+  "type": "1"
+}
+
+<> 2025-02-08T171322.200.json
+
+###
+
 GET http://localhost:8000/member/member/count
 Accept: application/json
 token: 123
@@ -576,16 +594,6 @@ User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2025-01-21T091526.200.json
-
-###
-
-GET http://localhost:8000/member/member/count
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2025-01-21T091401.500.json
 
 ###
 
