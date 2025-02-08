@@ -27,7 +27,7 @@ import {defineComponent, ref} from "vue";
 import store from "@/store";
 
 export default defineComponent({
-  name: "the-header",
+  name: "the-header-view",
   setup() {
     let member = store.state.member;
     console.log("111",store.state.member.mobile)
