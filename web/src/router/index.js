@@ -12,6 +12,9 @@ const routes = [
         children: [{
             path: 'welcome',
             component: () => import('../views/main/welcome.vue')
+        }, {
+            path: 'passenger',
+            component: () => import('../views/main/passenger.vue')
         }]
     },
     //默认重定向到welcome路由
@@ -41,7 +44,7 @@ router.beforeEach((to, from, next) => {
         console.log("页面登录校验开始：", _member);
         if (!_member.token) {
             console.log("用户未登录或登录超时！");
-            notification.error({ description: "未登录或登录超时" });
+            notification.error({description: "未登录或登录超时"});
             next('/login');
         } else {
             next();
