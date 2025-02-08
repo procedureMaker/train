@@ -1,7 +1,9 @@
 <template>
   <a-row class="login">
     <a-col :span="8" :offset="8" class="login-main">
-      <h1 style="text-align: center"><rocket-two-tone />&nbsp;12306售票系统</h1>
+      <h1 style="text-align: center">
+        <rocket-two-tone/>&nbsp;12306售票系统
+      </h1>
       <a-form
           :model="loginForm"
           name="basic"
@@ -37,42 +39,42 @@
   </a-row>
 </template>
 <script>
-import { defineComponent, reactive } from 'vue';
+import {defineComponent, reactive} from 'vue';
 import axios from "axios";
-import { notification } from 'ant-design-vue';
+import {notification} from 'ant-design-vue';
 import store from "@/store";
 import {useRouter} from "vue-router";
 
 export default defineComponent({
-  name:"login-view",
+  name: "login-view",
   setup() {
     const router = useRouter();
     const loginForm = reactive({
-      mobile:'',
-      code:'',
+      mobile: '',
+      code: '',
     });
     const sendCode = () => {
-      axios.post("/member/member/send-code",{
-        mobile:loginForm.mobile
+      axios.post("/member/member/send-code", {
+        mobile: loginForm.mobile
       }).then(response => {
         let data = response.data;
-        if (data.success){
-          notification.success({description:'发送验证码成功！'});
+        if (data.success) {
+          notification.success({description: '发送验证码成功！'});
           loginForm.code = "8888";
-        }else {
-          notification.error({description:data.message});
+        } else {
+          notification.error({description: data.message});
         }
       });
     };
     const login = () => {
-      axios.post("/member/member/login",loginForm).then(response => {
+      axios.post("/member/member/login", loginForm).then(response => {
         let data = response.data;
-        if (data.success){
-          notification.success({description:'登录成功!'});
+        if (data.success) {
+          notification.success({description: '登录成功!'});
           router.push("/");
-          store.commit("setMember",data.content);
-        }else {
-          notification.error({description:data.message});
+          store.commit("setMember", data.content);
+        } else {
+          notification.error({description: data.message});
         }
       })
     };
@@ -89,6 +91,7 @@ export default defineComponent({
   font-size: 25px;
   font-weight: bold;
 }
+
 .login-main {
   margin-top: 100px;
   padding: 30px 30px 20px;

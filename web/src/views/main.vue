@@ -12,7 +12,7 @@
           <a-sub-menu key="sub1">
             <template #title>
               <span>
-                <user-outlined />
+                <user-outlined/>
                 subnav 1
               </span>
             </template>
@@ -24,7 +24,7 @@
           <a-sub-menu key="sub2">
             <template #title>
               <span>
-                <laptop-outlined />
+                <laptop-outlined/>
                 subnav 2
               </span>
             </template>
@@ -36,7 +36,7 @@
           <a-sub-menu key="sub3">
             <template #title>
               <span>
-                <notification-outlined />
+                <notification-outlined/>
                 subnav 3
               </span>
             </template>
@@ -56,7 +56,7 @@
         <a-layout-content
             :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
         >
-          Content
+          所有会员总数：{{ count }}
         </a-layout-content>
       </a-layout>
     </a-layout>
@@ -64,9 +64,12 @@
 
 </template>
 <script>
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
+import {UserOutlined, LaptopOutlined, NotificationOutlined} from '@ant-design/icons-vue';
+import {defineComponent, ref} from 'vue';
 import TheHeader from "@/components/the-header";
+import axios from "axios";
+import {notification} from "ant-design-vue";
+
 export default defineComponent({
   name: "main-view",
   components: {
@@ -76,9 +79,24 @@ export default defineComponent({
     NotificationOutlined,
   },
   setup() {
+    // const count：声明了一个常量 count，它是一个响应式引用对象。
+    // ref(0)：调用 ref 函数，传入初始值 0，将 0 转换为一个响应式引用。
+    // count.value：通过 .value 访问或修改响应式引用的值。
+    const count = ref(0);
+    axios.get("/member/member/count").then(response => {
+      let data = response.data;     // 获取响应体中的数据
+      if (data.success) {
+        // data.content：如果请求成功，后端返回的实际数据存储在 content 属性中。
+        // data.message：如果请求失败，后端返回的错误信息存储在 message 属性中
+        count.value = data.content; // 如果成功，更新响应式数据
+      } else {
+        notification.error({description: data.message});
+      }
+    });
+
 
     return {
-
+      count,
       selectedKeys2: ref(['1']),
       collapsed: ref(false),
       openKeys: ref(['sub1']),
