@@ -1,5 +1,32 @@
 GET http://localhost:8000/member/passenger/query-list
 Accept: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3NDA0MDU4MTMsIm1vYmlsZSI6IjEyMzQ1Njc4MDAxIiwiaWQiOjE4ODQ5MjEwNDY4MzEzMTY5OTIsImV4cCI6MTc0MDQ5MjIxMywiaWF0IjoxNzQwNDA1ODEzfQ.c5PPbPhT0gBj_WCYcDzOAAI4I1JTm8cx9aVn4QjELVY
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2025-02-24T220353.200.json
+
+###
+
+POST http://localhost:8000/member/member/login
+Content-Type: application/json
+Content-Length: 47
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "mobile": "12345678001",
+  "code": "8888"
+}
+
+<> 2025-02-24T220334.200.json
+
+###
+
+GET http://localhost:8000/member/passenger/query-list
+Accept: application/json
 token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3NDAxOTQ5MjMsIm1vYmlsZSI6IjEyMzQ1Njc4MDAxIiwiaWQiOjE4ODQ5MjEwNDY4MzEzMTY5OTIsImV4cCI6MTc0MDI4MTMyMywiaWF0IjoxNzQwMTk0OTIzfQ.ICnkDr-eDrecqUIunAVdTRCxc5mhjo5mlBpL4POF5hs
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
@@ -665,32 +692,6 @@ Accept-Encoding: br,deflate,gzip,x-gzip
 mobile=12345678000
 
 <> 2025-01-26T211539.200.json
-
-###
-
-POST http://localhost:8000/member/member/send-code
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 17
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-mobile=1234567800
-
-<> 2025-01-26T211526.200.json
-
-###
-
-POST http://localhost:8000/member/member/send-code
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 15
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-mobile=12345678
-
-<> 2025-01-26T211443.200.json
 
 ###
 

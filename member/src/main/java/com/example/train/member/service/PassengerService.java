@@ -11,6 +11,7 @@ import com.example.train.member.mapper.PassengerMapper;
 import com.example.train.member.req.PassengerQueryReq;
 import com.example.train.member.req.PassengerSaveReq;
 import com.example.train.member.resp.PassengerQueryResp;
+import com.github.pagehelper.PageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,8 @@ public class PassengerService {
         //domain持久层生成的代码不能去动，返回的东西放入resp中，请求的东西放入req，model view controller
         //mapper与数据库完成映射，包含具体的方法
         //service处理业务具体逻辑
+        PageHelper.startPage(2,2);
+        //执行SQL语句的上一行执行就行
         List<Passenger> passengerList = passengerMapper.selectByExample(passengerExample);
         return BeanUtil.copyToList(passengerList, PassengerQueryResp.class);
     }
