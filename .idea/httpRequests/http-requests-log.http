@@ -1,3 +1,36 @@
+GET http://localhost:8000/member/passenger/query-list?page=1&size=200
+Accept: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3NDA0MDU4MTMsIm1vYmlsZSI6IjEyMzQ1Njc4MDAxIiwiaWQiOjE4ODQ5MjEwNDY4MzEzMTY5OTIsImV4cCI6MTc0MDQ5MjIxMywiaWF0IjoxNzQwNDA1ODEzfQ.c5PPbPhT0gBj_WCYcDzOAAI4I1JTm8cx9aVn4QjELVY
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2025-02-24T222406.200.json
+
+###
+
+GET http://localhost:8000/member/passenger/query-list?page=1&size=2
+Accept: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3NDA0MDU4MTMsIm1vYmlsZSI6IjEyMzQ1Njc4MDAxIiwiaWQiOjE4ODQ5MjEwNDY4MzEzMTY5OTIsImV4cCI6MTc0MDQ5MjIxMywiaWF0IjoxNzQwNDA1ODEzfQ.c5PPbPhT0gBj_WCYcDzOAAI4I1JTm8cx9aVn4QjELVY
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2025-02-24T222353.200.json
+
+###
+
+GET http://localhost:8000/member/passenger/query-list
+Accept: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3NDA0MDU4MTMsIm1vYmlsZSI6IjEyMzQ1Njc4MDAxIiwiaWQiOjE4ODQ5MjEwNDY4MzEzMTY5OTIsImV4cCI6MTc0MDQ5MjIxMywiaWF0IjoxNzQwNDA1ODEzfQ.c5PPbPhT0gBj_WCYcDzOAAI4I1JTm8cx9aVn4QjELVY
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2025-02-24T222255.200.json
+
+###
+
 GET http://localhost:8000/member/passenger/query-list
 Accept: application/json
 token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3NDA0MDU4MTMsIm1vYmlsZSI6IjEyMzQ1Njc4MDAxIiwiaWQiOjE4ODQ5MjEwNDY4MzEzMTY5OTIsImV4cCI6MTc0MDQ5MjIxMywiaWF0IjoxNzQwNDA1ODEzfQ.c5PPbPhT0gBj_WCYcDzOAAI4I1JTm8cx9aVn4QjELVY
@@ -653,45 +686,6 @@ Accept-Encoding: br,deflate,gzip,x-gzip
 mobile=12345678001
 
 <> 2025-01-30T190612.200.json
-
-###
-
-POST http://localhost:8000/member/member/send-code
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 18
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-mobile=12345678000
-
-<> 2025-01-27T130746.200.json
-
-###
-
-POST http://localhost:8000/member/member/send-code
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 18
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-mobile=12345678000
-
-<> 2025-01-27T125707.200.json
-
-###
-
-POST http://localhost:8000/member/member/send-code
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 18
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-mobile=12345678000
-
-<> 2025-01-26T211539.200.json
 
 ###
 
