@@ -1,6 +1,13 @@
 <template>
-  <h1>乘车人管理</h1>
-  <a-button type="primary" @click="showModal">新增</a-button>
+<!--  <a-button type="primary" @click="showModal">新增</a-button>-->
+  <!--p防止与下面元素重叠 -->
+  <p>
+    <a-button type="primary" @click="showModal">新增</a-button>
+  </p>
+
+  <!--乘车人员展示-->
+  <a-table :dataSource="dataSource" :columns="columns" pagination="true"/>
+  <!-- 新增弹窗 -->
   <a-modal v-model:visible="visible" title="乘车人" @ok="handleOk" ok-text="确认" cancel-text="取消">
     <a-form
         :model="passenger"
@@ -31,12 +38,14 @@
 </template>
 
 <script>
-import {defineComponent, reactive, ref} from "vue";
+import {defineComponent, ref, reactive} from 'vue';
 import axios from "axios";
 import {notification} from "ant-design-vue";
+
 export default defineComponent({
-  name:'passenger-view',
+  name: "passenger-view",
   setup() {
+
     const passenger = reactive({
       id: undefined,
       memberId: undefined,
@@ -52,12 +61,14 @@ export default defineComponent({
     const onFinishFailed = errorInfo => {
       console.log('Failed:', errorInfo);
     };
+
     const visible = ref(false);
     const showModal = () => {
       visible.value = true;
     };
     const handleOk = () => {
-      axios.post("/member/passenger/save", passenger).then(response =>{
+      axios.post("/member/passenger/save", passenger
+      ).then(response =>{
         let data = response.data;
         if(data.success) {
           notification.success({description:"乘车人基本信息保存成功"})
@@ -65,22 +76,49 @@ export default defineComponent({
         }else {
           notification.error({description: data.message})
         }
-
       })
     };
-    return{
+    const dataSource = [
+      {
+        key: '1',
+        name: '胡彦斌',
+        age: 32,
+        address: '西湖区湖底公园1号',
+      },
+      {
+        key: '2',
+        name: '胡彦祖',
+        age: 42,
+        address: '西湖区湖底公园1号',
+      },
+    ];
+    const columns = [
+      {
+        title: '姓名',
+        dataIndex: 'name',
+        key: 'name',
+      },
+      {
+        title: '年龄',
+        dataIndex: 'age',
+        key: 'age',
+      },
+      {
+        title: '住址',
+        dataIndex: 'address',
+        key: 'address',
+      },
+    ]
+    return {
       visible,
       showModal,
       handleOk,
       passenger,
       onFinish,
       onFinishFailed,
+      dataSource,
+      columns
     };
   },
 });
-
 </script>
-
-<style scoped>
-
-</style>
