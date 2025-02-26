@@ -2,7 +2,10 @@
   <!--  <a-button type="primary" @click="showModal">新增</a-button>-->
   <!--p防止与下面元素重叠 -->
   <p>
-    <a-button type="primary" @click="showModal">新增</a-button>
+    <a-space>
+      <a-button type="primary" @click="showModal">新增</a-button>
+      <a-button type="primary" @click="handleQuery()">刷新</a-button>
+    </a-space>
   </p>
 
   <!--乘车人员展示-->
@@ -117,7 +120,13 @@ export default defineComponent({
     ];
     // handlerQuery 是一个执行异步网络请求的副作用函数（发起 HTTP 请求并更新响应式数据 passengers.value）。
     // 它的核心目的是触发一个动作（发送请求并处理结果），而不是计算或返回一个值。
-    const handlerQuery = param => {
+    const handleQuery = param => {
+      if (!param) {
+        param = {
+          page: 1,
+          size: pagination.pageSize
+        };
+      }
       axios.get("/member/passenger/query-list", {
         params: {
           page: param.page,
@@ -138,14 +147,14 @@ export default defineComponent({
     };
 
     const handleTableChange = (pagination) => {
-      handlerQuery({
+      handleQuery({
         page: pagination.current,
         size: pagination.pageSize
       });
     };
 
     onMounted(() => {
-      handlerQuery({
+      handleQuery({
         page: 1,
         size: pagination.pageSize
       });
@@ -161,7 +170,8 @@ export default defineComponent({
       pagination,
       columns,
       passengers,
-      handleTableChange
+      handleTableChange,
+      handleQuery
     };
   },
 });
