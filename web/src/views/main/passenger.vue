@@ -6,7 +6,7 @@
   </p>
 
   <!--乘车人员展示-->
-  <a-table :dataSource="passengers" :columns="columns" pagination="true"/>
+  <a-table :dataSource="passengers" :columns="columns" :pagination="pagination"/>
   <!-- 新增弹窗 -->
   <a-modal v-model:visible="visible" title="乘车人" @ok="handleOk" ok-text="确认" cancel-text="取消">
     <a-form
@@ -78,6 +78,11 @@ export default defineComponent({
         }
       })
     };
+    const pagination = reactive({
+      total: 0,
+      current: 1,
+      pageSize: 2
+    });
     const passengers = ref([]);
     // const dataSource = [
     //   {
@@ -122,17 +127,17 @@ export default defineComponent({
         let data = response.data;
         if (data.success) {
           passengers.value = data.content.list;
+          pagination.total = data.content.total;
           console.log("1111", passengers)
         } else {
           notification.error({description: data.message});
         }
       });
     };
-
     onMounted(() => {
       handlerQuery({
         page: 1,
-        size: 5
+        size: 2
       });
     });
     return {
@@ -143,6 +148,7 @@ export default defineComponent({
       onFinish,
       onFinishFailed,
       // dataSource,
+      pagination,
       columns,
       passengers
     };
