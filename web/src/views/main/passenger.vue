@@ -74,12 +74,15 @@ export default defineComponent({
       visible.value = true;
     };
     const handleOk = () => {
-      axios.post("/member/passenger/save", passenger
-      ).then(response => {
+      axios.post("/member/passenger/save", passenger).then(response => {
         let data = response.data;
         if (data.success) {
           notification.success({description: "乘车人基本信息保存成功"})
           visible.value = false;
+          handleQuery({
+            page: pagination.current,
+            size: pagination.pageSize
+          });
         } else {
           notification.error({description: data.message})
         }
