@@ -100,14 +100,15 @@ export default defineComponent({
     ];
     const onAdd = () => {
       visible.value = true;
+      passenger.value = {}
     };
-    const onEdit = (record) =>{
-      passenger.value  = record;
+    const onEdit = (record) => {
+      passenger.value = window.Tool.copy(record);
       visible.value = true;
     };
     const handleOk = () => {
       axios.post("/member/passenger/save", passenger.value).then(response => {
-        console.log( passenger.value);
+        console.log(passenger.value);
         let data = response.data;
         if (data.success) {
           notification.success({description: "保存成功"})
