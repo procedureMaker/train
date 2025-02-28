@@ -32,16 +32,16 @@ public class PassengerService {
         DateTime now = DateTime.now();
         //从req拷贝到Passenger
         Passenger passenger = BeanUtil.copyProperties(passengerReq, Passenger.class);
-        if (ObjectUtil.isNull(passenger.getId())){
+        if (ObjectUtil.isNull(passenger.getId())) {
             passenger.setMemberId(LoginMemberContext.getId());
             passenger.setId(SnowUtil.getSnowflakeNextId());
             passenger.setCreateTime(now);
             passenger.setUpdateTime(now);
             passengerMapper.insert(passenger);
-        }else {
+        } else {
             passenger.setUpdateTime(now);
-            LOG.info("日期1：{}",passenger.getCreateTime());
-            LOG.info("日期2：{}",passenger.getUpdateTime());
+            LOG.info("日期1：{}", passenger.getCreateTime());
+            LOG.info("日期2：{}", passenger.getUpdateTime());
             passengerMapper.updateByPrimaryKey(passenger);
         }
 //        LOG.info("乘客信息添加成功:{}", passenger);
@@ -74,5 +74,9 @@ public class PassengerService {
         pageResp.setTotal(pageInfo.getTotal());
         pageResp.setList(list);
         return pageResp;
+    }
+
+    public void delete(Long id) {
+        passengerMapper.deleteByPrimaryKey(id);
     }
 }
