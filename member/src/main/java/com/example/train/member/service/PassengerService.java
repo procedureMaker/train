@@ -40,6 +40,8 @@ public class PassengerService {
             passengerMapper.insert(passenger);
         }else {
             passenger.setUpdateTime(now);
+            LOG.info("日期1：{}",passenger.getCreateTime());
+            LOG.info("日期2：{}",passenger.getUpdateTime());
             passengerMapper.updateByPrimaryKey(passenger);
         }
 //        LOG.info("乘客信息添加成功:{}", passenger);
