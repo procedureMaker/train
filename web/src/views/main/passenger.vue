@@ -28,6 +28,15 @@
           <a @click="onEdit(record)">编辑</a>
         </a-space>
       </template>
+      <!-- 自定义类型使用template   -->
+      <template v-else-if="column.dataIndex === 'type'">
+        <span v-for="item in PASSENGER_TYPE_ARRAY" :key="item.key">
+<!-- record.type为后端传过来的数据   当前常量与后端比较 相同id显示-->
+          <span v-if="item.key === record.type">
+            {{item.value}}
+          </span>
+        </span>
+      </template>
     </template>
 
   </a-table>
@@ -166,7 +175,6 @@ export default defineComponent({
           //设置分页控件的值
           pagination.value.current = param.page;
           pagination.value.total = data.content.total;
-          console.log("1111", passengers)
         } else {
           notification.error({description: data.message});
         }
