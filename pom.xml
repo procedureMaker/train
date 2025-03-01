@@ -38,17 +38,17 @@
         <spring-cloud.version>2022.0.0</spring-cloud.version>
     </properties>
 
-<!--    如果dependencies里的dependency自己没有声明version元素，-->
-<!--    那么maven就会到dependencyManagement里面去找有没有对该artifactId和groupId进行过版本声明，-->
-<!--    如果有，就继承它，如果没有就会报错，告诉你必须为dependency声明一个version,类似于全局-->
+    <!--    如果dependencies里的dependency自己没有声明version元素，-->
+    <!--    那么maven就会到dependencyManagement里面去找有没有对该artifactId和groupId进行过版本声明，-->
+    <!--    如果有，就继承它，如果没有就会报错，告诉你必须为dependency声明一个version,类似于全局-->
     <dependencyManagement>
         <dependencies>
 
-<!--            <dependency>-->
-<!--                <groupId>com.example</groupId>-->
-<!--                <artifactId>common</artifactId>-->
-<!--                <version>0.0.1-SNAPSHOT</version>-->
-<!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>com.example</groupId>-->
+            <!--                <artifactId>common</artifactId>-->
+            <!--                <version>0.0.1-SNAPSHOT</version>-->
+            <!--            </dependency>-->
             <dependency>
                 <groupId>org.example</groupId>
                 <artifactId>common</artifactId>
@@ -100,6 +100,11 @@
                 <version>1.4.6</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
