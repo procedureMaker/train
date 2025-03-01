@@ -30,10 +30,10 @@
       </template>
       <!-- 自定义类型使用template   -->
       <template v-else-if="column.dataIndex === 'type'">
-        <span v-for="item in PASSENGER_TYPE_ARRAY" :key="item.key">
+        <span v-for="item in PASSENGER_TYPE_ARRAY" :key="item.code">
 <!-- record.type为后端传过来的数据   当前常量与后端比较 相同id显示-->
-          <span v-if="item.key === record.type">
-            {{item.value}}
+          <span v-if="item.code === record.type">
+            {{item.desc}}
           </span>
         </span>
       </template>
@@ -59,7 +59,7 @@
 
       <a-form-item label="类型">
         <a-select v-model:value="passenger.type">
-          <a-select-option v-for="item in PASSENGER_TYPE_ARRAY" :key="item.key" :value="item.key">{{ item.value }}
+          <a-select-option v-for="item in PASSENGER_TYPE_ARRAY" :key="item.code" :value="item.code">{{ item.desc }}
           </a-select-option>
         </a-select>
       </a-form-item>
@@ -76,7 +76,7 @@ export default defineComponent({
   name: "passenger-view",
   setup() {
     //将复选跟后端一样申请为枚举或常量
-    const PASSENGER_TYPE_ARRAY = [{key: "1", value: "成人"}, {key: "2", value: "儿童"}, {key: "3", value: "学生"}]
+    const PASSENGER_TYPE_ARRAY = window.PASSENGER_TYPE_ARRAY;
     const visible = ref(false);
     let passenger = ref({
       id: undefined,
