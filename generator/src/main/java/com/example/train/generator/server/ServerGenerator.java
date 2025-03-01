@@ -33,7 +33,16 @@ public class ServerGenerator {
         return node.getText();
     }
     public static void main(String[] args) throws Exception {
-        getGeneratorPath();
+        String generatorPath = getGeneratorPath();
+
+        // 读取table节点
+        Document document = new SAXReader().read("generator/" + generatorPath);
+        Node table = document.selectSingleNode("//table");
+        System.out.println(table);
+        //读取table节点后拿到两个属性 tableName与domainOjectName
+        Node tableName = table.selectSingleNode("@tableName");
+        Node domainObjectName = table.selectSingleNode("@domainObjectName");
+        System.out.println(tableName.getText() + "/" + domainObjectName.getText());
     }
 }
 
