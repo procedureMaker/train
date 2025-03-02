@@ -1,6 +1,6 @@
 package com.example.train.${module}.req;
 
-import com.sgjk.train.common.req.PageReq;
+import com.example.train.common.req.PageReq;
 
 public class ${Domain}QueryReq extends PageReq {
 
