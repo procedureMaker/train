@@ -1,6 +1,5 @@
-package com.example.train.generator.server;
+package com.example.train.generator.gen;
 
-import cn.hutool.db.Db;
 import com.example.train.generator.util.DbUtil;
 import com.example.train.generator.util.Field;
 import com.example.train.generator.util.FreemarkerUtil;
