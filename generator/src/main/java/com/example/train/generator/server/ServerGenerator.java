@@ -36,6 +36,18 @@ public class ServerGenerator {
         return node.getText();
     }
 
+    /**
+     * 获取所有的Java类型，使用Set去重
+     */
+    private static Set<String> getJavaTypes(List<Field> fieldList) {
+        Set<String> set = new HashSet<>();
+        for (int i = 0; i < fieldList.size(); i++) {
+            Field field = fieldList.get(i);
+            set.add(field.getJavaType());
+        }
+        return set;
+    }
+
     public static void main(String[] args) throws Exception {
         //获取mybatis-generator
         String generatorPath = getGeneratorPath();
@@ -85,8 +97,8 @@ public class ServerGenerator {
         //表中文名  获得表注释
         String tableNameCn = DbUtil.getTableComment(tableName.getName());
         List<Field> fieldList = DbUtil.getColumnByTableName(tableName.getText());
-        System.out.println(tableName.getName() + "----" + tableName.getText());
-
+//        System.out.println(tableName.getName() + "----" + tableName.getText());
+        Set<String> typeSet = getJavaTypes(fieldList);
 
         // 组装参数
         Map<String, Object> param = new HashMap<>();
@@ -94,18 +106,22 @@ public class ServerGenerator {
         param.put("Domain", Domain);
         param.put("domain", domain);
         param.put("do_main", do_main);
+        param.put("tableNameCn", tableNameCn);
+        param.put("fieldList", fieldList);
+        param.put("typeSet", typeSet);
         System.out.println("组装参数：" + param);
 
-        gen(Domain, param, "service");
-        gen(Domain, param, "controller");
+//        gen(Domain, param,"service", "service");
+//        gen(Domain, param, "controller","controller");
+        gen(Domain, param, "req", "saveReq");
     }
 
-    private static void gen(String Domain, Map<String, Object> param, String target) throws IOException, TemplateException {
+    private static void gen(String Domain, Map<String, Object> param, String packageName, String target) throws IOException, TemplateException {
         FreemarkerUtil.initConfig(target + ".ftl");
-        String Target = target.substring(0, 1).toUpperCase() + target.substring(1);
         //针对不同的service或controller创建对应的目录
-        String toPath = serverPath + target + "/";
+        String toPath = serverPath + packageName + "/";
         new File(toPath).mkdirs();
+        String Target = target.substring(0, 1).toUpperCase() + target.substring(1);
         String fileName = toPath + Domain + Target + ".java";
         System.out.println("开始生成：" + fileName);
         FreemarkerUtil.generator(fileName, param);
