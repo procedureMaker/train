@@ -1,4 +1,4 @@
-package com.example.train.${module}.controller;
+package com.example.train.${module}.controller.admin;
 
 import com.example.train.common.context.LoginMemberContext;
 import com.example.train.common.resp.CommonResp;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/${do_main}")
-public class ${Domain}Controller {
+@RequestMapping("/admin/${do_main}")
+public class ${Domain}AdminController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(${Domain}Controller.class);
+    private static final Logger LOG = LoggerFactory.getLogger(${Domain}AdminController.class);
     @Autowired
     private ${Domain}Service ${domain}Service;
 

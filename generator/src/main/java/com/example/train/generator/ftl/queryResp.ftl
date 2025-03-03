@@ -1,3 +1,5 @@
+package com.example.train.${module}.resp;
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 <#list typeSet as type>

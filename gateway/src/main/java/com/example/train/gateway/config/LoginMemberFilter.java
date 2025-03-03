@@ -22,7 +22,7 @@ public class LoginMemberFilter implements Ordered, GlobalFilter {
         String path = exchange.getRequest().getURI().getPath();
 
         // 排除不需要拦截的请求
-        if (path.contains("/business")
+        if (path.contains("/admin")
                 || path.contains("/Hello")
                 || path.contains("/member/member/login")
                 || path.contains("/member/member/send-code")) {
