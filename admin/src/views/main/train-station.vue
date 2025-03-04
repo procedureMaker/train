@@ -175,25 +175,7 @@ export default defineComponent({
       });
     };
 
-    /**
-     * 车位下拉框筛选
-     */
-    const filterTrainCodeOption = (input, option) => {
-      console.log(input,option);
-      return option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0;
-    }
 
-    //获取所有火车车次
-    const queryTrainCode = () =>{
-      axios.get("/business/admin/train/query-all").then((response) => {
-        const data = response.data;
-        if (data.success) {
-          trains.value = data.content;
-        } else {
-          notification.error({description: data.message});
-        }
-      })
-    };
     const handleOk = () => {
       axios.post("/business/admin/train-station/save", trainStation.value).then((response) => {
         let data = response.data;
@@ -251,7 +233,6 @@ export default defineComponent({
         page: 1,
         size: pagination.value.pageSize
       });
-      queryTrainCode();
     });
 
     return {
@@ -267,9 +248,7 @@ export default defineComponent({
       handleOk,
       onEdit,
       onDelete,
-      queryTrainCode,
-      trains,
-      filterTrainCodeOption
+      trains
     };
   },
 });
