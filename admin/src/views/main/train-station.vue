@@ -28,7 +28,14 @@
            ok-text="确认" cancel-text="取消">
     <a-form :model="trainStation" :label-col="{span: 4}" :wrapper-col="{ span: 20 }">
       <a-form-item label="车次编号">
-        <a-input v-model:value="trainStation.trainCode"/>
+        <!--        <a-input v-model:value="trainStation.trainCode" />-->
+        <a-select v-model:value="trainStation.trainCode" show-search
+                  :filter-option="filterTrainCodeOption">
+          <a-select-option v-for="item in trains" :key="item.code"
+                           :value="item.code" :label="item.code + item.start + item.end">
+            {{item.code}} | {{item.start}} ~ {{item.end}}
+          </a-select-option>
+        </a-select>
       </a-form-item>
       <a-form-item label="站序">
         <a-input v-model:value="trainStation.index"/>
@@ -64,6 +71,8 @@ import {pinyin} from "pinyin-pro";
 export default defineComponent({
   name: "train-station-view",
   setup() {
+    //获取所有火车车次,用于车位下拉框
+    const trains = ref([]);
     const visible = ref(false);
     let trainStation = ref({
       id: undefined,
@@ -171,12 +180,20 @@ export default defineComponent({
       });
     };
 
+    /**
+     * 车位下拉框筛选
+     */
+    const filterTrainCodeOption = (input, option) => {
+      console.log(input,option);
+      return option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+    }
+
     //获取所有火车车次
     const queryTrainCode = () =>{
       axios.get("/business/admin/train/query-all").then((response) => {
         const data = response.data;
         if (data.success) {
-          console.log(data.content);
+          trains.value = data.content;
         } else {
           notification.error({description: data.message});
         }
@@ -255,7 +272,9 @@ export default defineComponent({
       handleOk,
       onEdit,
       onDelete,
-      queryTrainCode
+      queryTrainCode,
+      trains,
+      filterTrainCodeOption
     };
   },
 });
