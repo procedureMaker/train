@@ -47,8 +47,19 @@ public class TrainStationService {
 
     public PageResp<TrainStationQueryResp> queryList(TrainStationQueryReq req) {
         TrainStationExample trainStationExample = new TrainStationExample();
-        trainStationExample.setOrderByClause("id desc");
+//        trainStationExample.setOrderByClause("id desc");
+        /**
+         *  index是mysql关键字加反引号  ``
+         */
+        trainStationExample.setOrderByClause("train_code asc, `index` asc");
         TrainStationExample.Criteria criteria = trainStationExample.createCriteria();
+
+        /**
+         *  code不为空，走条件查询   null 和 ""空字符的区别  NotNull对空字符串无效
+         */
+        if (ObjectUtil.isNotEmpty(req.getTrainCode())) {
+            criteria.andTrainCodeEqualTo(req.getTrainCode());
+        }
 
 
         LOG.info("查询页码：{}", req.getPage());
