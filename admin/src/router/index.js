@@ -22,6 +22,9 @@ const routes = [
         }, {
             path: 'train-station',
             component: () => import('../views/main/train-station.vue')
+        }, {
+            path: 'train-carriage',
+            component: () => import('../views/main/train-carriage.vue')
         }]
     },
     //默认重定向到welcome路由
