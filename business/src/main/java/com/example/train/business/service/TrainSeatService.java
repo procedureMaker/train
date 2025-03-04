@@ -47,7 +47,7 @@ public class TrainSeatService {
 
     public PageResp<TrainSeatQueryResp> queryList(TrainSeatQueryReq req) {
         TrainSeatExample trainSeatExample = new TrainSeatExample();
-        trainSeatExample.setOrderByClause("id desc");
+        trainSeatExample.setOrderByClause("train_code asc, carriage_index asc, carriage_seat_index asc");
         TrainSeatExample.Criteria criteria = trainSeatExample.createCriteria();
 
         /**
