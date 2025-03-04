@@ -50,6 +50,12 @@ public class TrainSeatService {
         trainSeatExample.setOrderByClause("id desc");
         TrainSeatExample.Criteria criteria = trainSeatExample.createCriteria();
 
+        /**
+         *  code不为空，走条件查询   null 和 ""空字符的区别  NotNull对空字符串无效
+         */
+        if (ObjectUtil.isNotEmpty(req.getTrainCode())){
+            criteria.andTrainCodeEqualTo(req.getTrainCode());
+        }
 
         LOG.info("查询页码：{}", req.getPage());
         LOG.info("每页条数：{}", req.getSize());
