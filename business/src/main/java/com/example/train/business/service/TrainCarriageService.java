@@ -1,9 +1,14 @@
 package com.example.train.business.service;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
+import com.example.train.business.domain.Station;
+import com.example.train.business.domain.StationExample;
 import com.example.train.business.enums.SeatColEnum;
+import com.example.train.common.exception.BusinessException;
+import com.example.train.common.exception.BusinessExceptionEnum;
 import com.example.train.common.resp.PageResp;
 import com.example.train.common.util.SnowUtil;
 import com.example.train.business.domain.TrainCarriage;
@@ -40,6 +45,12 @@ public class TrainCarriageService {
         TrainCarriage trainCarriage = BeanUtil.copyProperties(trainCarriageReq, TrainCarriage.class);
         LOG.info("计算得出车座总数：{},列数:{}", trainCarriageReq.getSeatCount(), trainCarriageReq.getColCount());
         if (ObjectUtil.isNull(trainCarriage.getId())) {
+
+            TrainCarriage trainCarriageDB = selectByUnique(trainCarriageReq.getTrainCode(),trainCarriageReq.getIndex());
+            if (ObjectUtil.isNotEmpty(trainCarriageDB)) {
+                throw new BusinessException(BusinessExceptionEnum.BUSINESS_TRAIN_CARRIAGE_NAME_UNIQUE_ERROR);
+            }
+
             trainCarriage.setId(SnowUtil.getSnowflakeNextId());
             trainCarriage.setCreateTime(now);
             trainCarriage.setUpdateTime(now);
@@ -51,6 +62,18 @@ public class TrainCarriageService {
             trainCarriageMapper.updateByPrimaryKey(trainCarriage);
         }
 //        LOG.info("乘客信息添加成功:{}", trainCarriage);
+    }
+
+    private TrainCarriage selectByUnique(String trainCode,Integer index) {
+        TrainCarriageExample trainCarriageExample = new TrainCarriageExample();
+        trainCarriageExample.createCriteria().andTrainCodeEqualTo(trainCode).andIndexEqualTo(index);
+        List<TrainCarriage> list = trainCarriageMapper.selectByExample(trainCarriageExample);
+
+        if(CollUtil.isNotEmpty(list)){
+            return list.get(0);
+        }else {
+            return null;
+        }
     }
 
     public PageResp<TrainCarriageQueryResp> queryList(TrainCarriageQueryReq req) {
