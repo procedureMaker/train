@@ -3,6 +3,7 @@ package com.example.train.business.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
+import com.example.train.business.enums.SeatColEnum;
 import com.example.train.common.resp.PageResp;
 import com.example.train.common.util.SnowUtil;
 import com.example.train.business.domain.TrainCarriage;
@@ -29,8 +30,15 @@ public class TrainCarriageService {
 
     public void save(TrainCarriageSaveReq trainCarriageReq) {
         DateTime now = DateTime.now();
+        //自动计算出车座总数和列数
+        List<SeatColEnum> seatColEnums = SeatColEnum.getColsByType(trainCarriageReq.getSeatType());
+        trainCarriageReq.setColCount(seatColEnums.size());
+        trainCarriageReq.setSeatCount(seatColEnums.size() * trainCarriageReq.getRowCount());
+
+
         //从req拷贝到TrainCarriage
         TrainCarriage trainCarriage = BeanUtil.copyProperties(trainCarriageReq, TrainCarriage.class);
+        LOG.info("计算得出车座总数：{},列数:{}", trainCarriageReq.getSeatCount(), trainCarriageReq.getColCount());
         if (ObjectUtil.isNull(trainCarriage.getId())) {
             trainCarriage.setId(SnowUtil.getSnowflakeNextId());
             trainCarriage.setCreateTime(now);
@@ -81,6 +89,7 @@ public class TrainCarriageService {
     public void delete(Long id) {
         trainCarriageMapper.deleteByPrimaryKey(id);
     }
+
     public List<TrainCarriage> selectByTrainCode(String trainCode) {
         TrainCarriageExample trainCarriageExample = new TrainCarriageExample();
         trainCarriageExample.setOrderByClause("`index` asc");
