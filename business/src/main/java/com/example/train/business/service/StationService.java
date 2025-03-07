@@ -36,15 +36,13 @@ public class StationService {
         Station station = BeanUtil.copyProperties(stationReq, Station.class);
         if (ObjectUtil.isNull(station.getId())) {
 
-            StationExample stationExample = new StationExample();
-            stationExample.createCriteria().andNameEqualTo(stationReq.getName());
-            List<Station> list = stationMapper.selectByExample(stationExample);
-            if (CollUtil.isNotEmpty(list)){
+            Station stationDB = selectByUnique(stationReq.getName());
+            if (ObjectUtil.isNotEmpty(stationDB)) {
                 throw new BusinessException(BusinessExceptionEnum.BUSINESS_STATION_NAME_UNIQUE_ERROR);
             }
 
 
-                station.setId(SnowUtil.getSnowflakeNextId());
+            station.setId(SnowUtil.getSnowflakeNextId());
             station.setCreateTime(now);
             station.setUpdateTime(now);
             stationMapper.insert(station);
@@ -55,6 +53,18 @@ public class StationService {
             stationMapper.updateByPrimaryKey(station);
         }
 //        LOG.info("乘客信息添加成功:{}", station);
+    }
+
+    private Station selectByUnique(String name) {
+        StationExample stationExample = new StationExample();
+        stationExample.createCriteria().andNameEqualTo(name);
+        List<Station> list = stationMapper.selectByExample(stationExample);
+
+        if(CollUtil.isNotEmpty(list)){
+            return list.get(0);
+        }else {
+            return null;
+        }
     }
 
     public PageResp<StationQueryResp> queryList(StationQueryReq req) {
