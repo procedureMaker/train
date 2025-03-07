@@ -1,5 +1,6 @@
 package com.example.train.business.controller.admin;
 
+import com.example.train.business.service.TrainSeatService;
 import com.example.train.common.context.LoginMemberContext;
 import com.example.train.common.resp.CommonResp;
 import com.example.train.common.resp.PageResp;
@@ -18,6 +19,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin/train")
 public class TrainAdminController {
+
+    @Autowired
+    private TrainSeatService trainSeatService;
 
     private static final Logger LOG = LoggerFactory.getLogger(TrainAdminController.class);
     @Autowired
@@ -46,4 +50,11 @@ public class TrainAdminController {
         List<TrainQueryResp> trainQueryResps = trainService.queryAll();
         return new CommonResp<>(trainQueryResps);
     }
+
+    @GetMapping("/gen-seat/{trainCode}")
+    public CommonResp<Object> genSeat(@PathVariable String trainCode) {
+        trainSeatService.genTrainSeat(trainCode);
+        return new CommonResp<>();
+    }
+
 }

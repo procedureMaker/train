@@ -1,3 +1,33 @@
+GET http://localhost:8000/business/admin/train/gen-seat/G1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2025-03-04T212649.200.json
+
+###
+
+GET http://localhost:8000/business/admin/train/gen-seat/G1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2025-03-04T210729.200.json
+
+###
+
+GET http://localhost:8000/business/admin/train/gen-seat/G2
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2025-03-04T203005.200.json
+
+###
+
 GET http://localhost:8000/business/hello
 Accept: application/json
 Connection: Keep-Alive
@@ -665,41 +695,6 @@ Accept-Encoding: br,deflate,gzip,x-gzip
 }
 
 <> 2025-02-08T171622.200.json
-
-###
-
-POST http://localhost:8001/member/passenger/save
-Content-Type: application/json
-Content-Length: 86
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "memberId": "12345678001",
-  "name": "test",
-  "idCard": "123321",
-  "type": "1"
-}
-
-<> 2025-02-08T171322.200.json
-
-###
-
-GET http://localhost:8000/member/member/count
-Accept: application/json
-token: 123
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-###
-
-GET http://localhost:8000/member/member/count
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
 
 ###
 
